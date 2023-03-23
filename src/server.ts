@@ -5,11 +5,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-  req.mysecret = "nike";
-  next();
-});
-
 app.get("/", (req, res) => {
   console.log("hello from express");
   res.status(200);
