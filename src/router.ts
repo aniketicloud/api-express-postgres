@@ -5,10 +5,12 @@ const router = Router();
 /**
  * Product
  */
-router.post("/product", () => {});
-router.get("/product", () => {});
+router.get("/product", (req, res) => {
+  res.json({ message: "Hello from Postgres" });
+});
 router.get("/product/:id", () => {});
 router.put("/product/:id", () => {});
+router.post("/product", () => {});
 router.delete("/product/:id", () => {});
 
 /**
