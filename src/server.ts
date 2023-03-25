@@ -3,19 +3,14 @@ import router from "./router";
 import morgan from "morgan";
 import cors from "cors";
 import { protect } from "./modules/auth";
+import { createUser, signin } from "./handlers/user";
 
 const app = express();
-
-const customLogger = (message: string) => (req, res, next) => {
-  console.log(`Hello from ${message}`);
-  next();
-};
 
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(customLogger("Customer Support"));
 app.get("/", (req, res) => {
   console.log("hello from express");
   res.status(200);
@@ -23,5 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", protect, router);
+app.post("/user", createUser);
+app.post("/signin", signin);
 
 export default app;
