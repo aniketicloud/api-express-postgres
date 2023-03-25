@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 export const createJWT = (user) => {
   const token = jwt.sign(
@@ -8,6 +9,12 @@ export const createJWT = (user) => {
 
   return token;
 };
+
+const saltRounds = 5;
+export const comparePasswords = (password, hash) => {
+  return bcrypt.compare(password, hash);
+};
+export const hasPassword = (password) => bcrypt.hash(password, saltRounds);
 
 export const protect = (req, res, next) => {
   const bearer = req.headers.authorization;
@@ -30,7 +37,7 @@ export const protect = (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(401);
     res.json({ message: "not a valid user" });
     return;
