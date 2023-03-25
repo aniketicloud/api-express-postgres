@@ -14,7 +14,7 @@ const saltRounds = 5;
 export const comparePasswords = (password, hash) => {
   return bcrypt.compare(password, hash);
 };
-export const hasPassword = (password) => bcrypt.hash(password, saltRounds);
+export const hashPassword = (password) => bcrypt.hash(password, saltRounds);
 
 export const protect = (req, res, next) => {
   const bearer = req.headers.authorization;
