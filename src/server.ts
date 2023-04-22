@@ -12,9 +12,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res, next) => {
-  setTimeout(() => {
-    next(new Error("custom Async error thrown"));
-  }, 1);
+  // setTimeout(() => {
+  //   next(new Error("custom Async error thrown")`);
+  // }, 1);
+  res.json({ message: "Hello" });
 });
 
 app.use("/api", protect, router);
